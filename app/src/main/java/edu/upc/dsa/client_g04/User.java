@@ -2,16 +2,14 @@ package edu.upc.dsa.client_g04;
 
 public class User {
     private String userName;
-    private String fullName;
     private String email;
     private String password;
     private Boolean active;
 
     public User(){}
 
-    public User(String userName, String fullName, String email, String password) {
+    public User(String userName, String email, String password) {
         this.userName = userName;
-        this.fullName = fullName;
         this.email = email;
         this.password = password;
     }
@@ -22,14 +20,6 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 
     public String getEmail() {
