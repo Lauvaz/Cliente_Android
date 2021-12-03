@@ -9,4 +9,6 @@ public interface APIREST {
     @POST("user/register")
     Call<User> addUser(@Body User user);
 
+    @POST("user/login")
+    Call<LoginUser> loginUser(@Body LoginUser user);
 }
