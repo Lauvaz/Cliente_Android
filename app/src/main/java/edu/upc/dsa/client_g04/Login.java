@@ -22,12 +22,14 @@ public class Login extends AppCompatActivity {
 
     final Logger log = Logger.getLogger(String.valueOf(Register.class));
 
+    static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://127.0.0.1")
+                .baseUrl(BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         apiRest = retrofit.create(APIREST.class);
@@ -59,7 +61,7 @@ public class Login extends AppCompatActivity {
     }
 
     protected void register2Click(View v){
-        Intent intent = new Intent(this, Register.class);
-        startActivity(intent);
+        Intent intentRegister = new Intent(this, Register.class);
+        startActivity(intentRegister);
     }
 }

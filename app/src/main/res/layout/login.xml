@@ -54,17 +54,6 @@
         app:layout_constraintStart_toEndOf="@+id/usernamelogin"
         app:layout_constraintTop_toTopOf="@+id/usernamelogin" />
 
-    <EditText
-        android:id="@+id/editPasswordLogin"
-        android:layout_width="180dp"
-        android:layout_height="42dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/passwordlogin"
-        app:layout_constraintStart_toStartOf="@+id/editUsernameLogin"
-        app:layout_constraintTop_toTopOf="@+id/passwordlogin" />
-
     <Button
         android:id="@+id/loginClick"
         android:layout_width="wrap_content"
@@ -85,5 +74,15 @@
         android:text="Registrarse"
         app:layout_constraintBottom_toBottomOf="@+id/loginClick"
         app:layout_constraintStart_toStartOf="@+id/usernamelogin" />
+
+    <EditText
+        android:id="@+id/editPasswordLogin"
+        android:layout_width="181dp"
+        android:layout_height="41dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/passwordlogin"
+        app:layout_constraintStart_toStartOf="@+id/editUsernameLogin"
+        app:layout_constraintTop_toTopOf="@+id/passwordlogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

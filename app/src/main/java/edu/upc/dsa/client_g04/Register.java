@@ -1,5 +1,6 @@
 package edu.upc.dsa.client_g04;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -15,7 +16,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Register extends AppCompatActivity {
-    TextView name;
     TextView username;
     TextView email;
     TextView password;
@@ -23,12 +23,14 @@ public class Register extends AppCompatActivity {
 
     final Logger log = Logger.getLogger(String.valueOf(Register.class));
 
+    static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://127.0.0.1")
+                .baseUrl(BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         apiRest = retrofit.create(APIREST.class);
@@ -39,6 +41,8 @@ public class Register extends AppCompatActivity {
         this.email = (TextView) findViewById(R.id.editEmail);
         this.password = (TextView) findViewById(R.id.editPassword);
 
+        Intent intentLogin = new Intent(this, Register.class);
+
         User user = new User(username.getText().toString(),email.getText().toString(),password.getText().toString()); //Cambio de CharSequence a String
 
         Call<User> call = apiRest.addUser(user);
@@ -48,6 +52,7 @@ public class Register extends AppCompatActivity {
                 if (response.isSuccessful()){
                     User user = response.body();
                     log.info("Usuario registrado con nombre de usuario:"+user.getUserName());
+                    startActivity(intentLogin);
                 } else {
                     log.info("Error al registrarse");
                 }
