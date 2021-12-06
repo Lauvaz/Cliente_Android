@@ -41,7 +41,7 @@ public class Register extends AppCompatActivity {
         this.email = (TextView) findViewById(R.id.editEmail);
         this.password = (TextView) findViewById(R.id.editPassword);
 
-        Intent intentLogin = new Intent(this, Register.class);
+        Intent intentLogin = new Intent(this, Login.class);
 
         User user = new User(username.getText().toString(),email.getText().toString(),password.getText().toString()); //Cambio de CharSequence a String
 
