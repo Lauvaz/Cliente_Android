@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#192049"
-        android:onClick="register2Click"
+        android:onClick="registerLoginClick"
         android:text="Registrarse"
         app:layout_constraintBottom_toBottomOf="@+id/loginClick"
         app:layout_constraintStart_toStartOf="@+id/usernamelogin" />

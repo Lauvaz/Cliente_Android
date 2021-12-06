@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity {
         apiRest = retrofit.create(APIREST.class);
     }
 
-    protected void loginClick(View v){
+    public void loginClick(View v){
         this.username = (TextView) findViewById(R.id.editUsernameLogin);
         this.password = (TextView) findViewById(R.id.editPasswordLogin);
 
@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    protected void register2Click(View v){
+    public void registerLoginClick(View v){
         Intent intentRegister = new Intent(this, Register.class);
         startActivity(intentRegister);
     }
