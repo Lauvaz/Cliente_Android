@@ -4,7 +4,7 @@ public class User {
     private String userName;
     private String email;
     private String password;
-    private Boolean active;
+//    private Boolean active;
 
     public User(){}
 
@@ -30,14 +30,14 @@ public class User {
         this.email = email;
     }
 
-    public Boolean getActive() {
+ /*   public Boolean getActive() {
         return active;
     }
 
     public void setActive(Boolean active) {
         this.active = active;
     }
-
+*/
     public String getPassword() {
         return password;
     }
