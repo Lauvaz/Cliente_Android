@@ -1,4 +1,4 @@
-package edu.upc.dsa.client_g04;
+package edu.upc.dsa.client_g04.Activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.logging.Logger;
 
+import edu.upc.dsa.client_g04.APIREST;
+import edu.upc.dsa.client_g04.Models.LoginUser;
+import edu.upc.dsa.client_g04.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

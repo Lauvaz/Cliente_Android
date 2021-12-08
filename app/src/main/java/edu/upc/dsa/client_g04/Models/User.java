@@ -1,4 +1,4 @@
-package edu.upc.dsa.client_g04;
+package edu.upc.dsa.client_g04.Models;
 
 public class User {
     private String userName;
