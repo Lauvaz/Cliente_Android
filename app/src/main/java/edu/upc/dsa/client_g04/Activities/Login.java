@@ -1,4 +1,4 @@
-package edu.upc.dsa.client_g04.Activitys;
+package edu.upc.dsa.client_g04.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
