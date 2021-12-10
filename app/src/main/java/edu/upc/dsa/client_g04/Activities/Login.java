@@ -44,6 +44,8 @@ public class Login extends AppCompatActivity {
 
         LoginUser user = new LoginUser(name.getText().toString(),password.getText().toString());
 
+        Intent intentListObjects = new Intent(this, ListObjects.class);
+
         Call<LoginUser> call = apiRest.loginUser(user);
         call.enqueue(new Callback<LoginUser>() {
             @Override
@@ -51,6 +53,7 @@ public class Login extends AppCompatActivity {
                 if(response.isSuccessful()){
                     LoginUser user = response.body();
                     log.info("Inicio de sesion con nombre de usuario: "+user.getName());
+                    startActivity(intentListObjects);
                 } else {
                     log.info("Error al inicio de sesion");
                 }
