@@ -19,8 +19,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Register extends AppCompatActivity {
-    TextView username;
-    TextView email;
+    TextView name;
+    TextView mail;
     TextView password;
     APIREST apiRest;
 
@@ -40,13 +40,13 @@ public class Register extends AppCompatActivity {
     }
 
     public void registerClick(View v){
-        this.username = (TextView) findViewById(R.id.editUsername);
-        this.email = (TextView) findViewById(R.id.editEmail);
+        this.name = (TextView) findViewById(R.id.editUsername);
+        this.mail = (TextView) findViewById(R.id.editEmail);
         this.password = (TextView) findViewById(R.id.editPassword);
 
         Intent intentLogin = new Intent(this, Login.class);
 
-        User user = new User(username.getText().toString(),email.getText().toString(),password.getText().toString()); //Cambio de CharSequence a String
+        User user = new User(name.getText().toString(),mail.getText().toString(),password.getText().toString()); //Cambio de CharSequence a String
 
         Call<User> call = apiRest.addUser(user);
         call.enqueue(new Callback<User>() {
@@ -54,7 +54,7 @@ public class Register extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()){
                     User user = response.body();
-                    log.info("Usuario registrado con nombre de usuario:"+user.getUserName());
+                    log.info("Usuario registrado con nombre de usuario: "+user.getName());
                     startActivity(intentLogin);
                 } else {
                     log.info("Error al registrarse");

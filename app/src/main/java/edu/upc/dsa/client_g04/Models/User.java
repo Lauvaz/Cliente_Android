@@ -1,33 +1,33 @@
 package edu.upc.dsa.client_g04.Models;
 
 public class User {
-    private String userName;
-    private String email;
+    private String name;
+    private String mail;
     private String password;
 //    private Boolean active;
 
     public User(){}
 
-    public User(String userName, String email, String password) {
-        this.userName = userName;
-        this.email = email;
+    public User(String name, String mail, String password) {
+        this.name = name;
+        this.mail = mail;
         this.password = password;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getMail() {
+        return mail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMail(String email) {
+        this.mail = mail;
     }
 
  /*   public Boolean getActive() {

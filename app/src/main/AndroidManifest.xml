@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Client_G04">
         <activity
-            android:name=".Activities.Login"
+            android:name=".Activities.ListObjects"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".Activities.ListObjects"
+            android:name=".Activities.Login"
             android:exported="true">
         </activity>
     </application>

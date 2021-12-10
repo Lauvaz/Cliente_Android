@@ -43,9 +43,8 @@ public class ListObjects extends AppCompatActivity {
                 .build();
 
         apiRest = retrofit.create(APIREST.class);
-    }
 
-    private void getItemList(){
+
         Call<List<Object>> call = apiRest.getItemList();
         call.enqueue(new Callback<List<Object>>() {
             @Override

@@ -19,7 +19,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Login extends AppCompatActivity {
-    TextView username;
+    TextView name;
     TextView password;
     APIREST apiRest;
 
@@ -39,10 +39,10 @@ public class Login extends AppCompatActivity {
     }
 
     public void loginClick(View v){
-        this.username = (TextView) findViewById(R.id.editUsernameLogin);
+        this.name = (TextView) findViewById(R.id.editUsernameLogin);
         this.password = (TextView) findViewById(R.id.editPasswordLogin);
 
-        LoginUser user = new LoginUser(username.getText().toString(),password.getText().toString());
+        LoginUser user = new LoginUser(name.getText().toString(),password.getText().toString());
 
         Call<LoginUser> call = apiRest.loginUser(user);
         call.enqueue(new Callback<LoginUser>() {
@@ -50,7 +50,7 @@ public class Login extends AppCompatActivity {
             public void onResponse(Call<LoginUser> call, Response<LoginUser> response) {
                 if(response.isSuccessful()){
                     LoginUser user = response.body();
-                    log.info("Inicio de sesion con nombre de usuario:"+user.getUserName());
+                    log.info("Inicio de sesion con nombre de usuario: "+user.getName());
                 } else {
                     log.info("Error al inicio de sesion");
                 }

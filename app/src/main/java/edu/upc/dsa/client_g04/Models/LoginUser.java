@@ -1,22 +1,22 @@
 package edu.upc.dsa.client_g04.Models;
 
 public class LoginUser {
-    private String userName;
+    private String name;
     private String password;
 
     public LoginUser(){}
 
-    public LoginUser(String userName, String password) {
-        this.userName = userName;
+    public LoginUser(String name, String password) {
+        this.name = name;
         this.password = password;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
