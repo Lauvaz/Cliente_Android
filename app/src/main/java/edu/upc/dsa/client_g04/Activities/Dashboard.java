@@ -19,4 +19,9 @@ public class Dashboard extends AppCompatActivity {
         Intent intentListObjects = new Intent(this, ListObjects.class);
         startActivity(intentListObjects);
     }
+
+    public void CerrarSesionClick(View v) {
+        Intent intentLogin = new Intent(this, Login.class);
+        startActivity(intentLogin);
+    }
 }
