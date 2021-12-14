@@ -11,13 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Client_G04">
         <activity
-            android:name=".Activities.Login"
+            android:name=".Activities.SplashScreen"
+            android:theme = "@style/SplashTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.Login"
+            android:exported="true">
         </activity>
         <activity
             android:name=".Activities.Register"
