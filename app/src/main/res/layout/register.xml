@@ -92,11 +92,12 @@
 
     <TextView
         android:id="@+id/titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_width="247dp"
+        android:layout_height="81dp"
+        android:layout_marginBottom="50dp"
         android:shadowColor="#000000"
-        android:text="Crear usario en ***"
+        android:text="Crear usario en GoldenRush"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/email"
