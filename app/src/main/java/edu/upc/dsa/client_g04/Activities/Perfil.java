@@ -1,6 +1,8 @@
 package edu.upc.dsa.client_g04.Activities;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,10 +14,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Perfil extends AppCompatActivity {
 
     APIREST apiRest;
-    static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
+
+    //static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
+    static final String BASEURL = "http://147.83.7.205:8080/dsaApp/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
         Retrofit retrofit = new Retrofit.Builder()
@@ -23,5 +30,15 @@ public class Perfil extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         apiRest = retrofit.create(APIREST.class);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Log.i("ActionBar", "Atrás!");
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

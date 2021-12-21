@@ -1,6 +1,10 @@
 package edu.upc.dsa.client_g04.Activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,14 +28,17 @@ public class ListObjects extends AppCompatActivity {
 
     List<Object> objectList;
     APIREST apiRest;
-    Object object;
 
     final Logger log = Logger.getLogger(String.valueOf(Register.class));
 
-    static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
+    //static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
+    static final String BASEURL = "http://147.83.7.205:8080/dsaApp/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listobjects);
 
@@ -65,9 +72,20 @@ public class ListObjects extends AppCompatActivity {
         });
     }
 
+
     public void inicializarRecyclerView(List<Object> objects){//Inicializar RecyclerView
         Adapter adapter= new Adapter(this,objects);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Log.i("ActionBar", "Atrás!");
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -28,7 +28,8 @@ public class Login extends AppCompatActivity {
     private boolean cargando;
     final Logger log = Logger.getLogger(String.valueOf(Register.class));
 
-    static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
+    //static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
+    static final String BASEURL = "http://147.83.7.205:8080/dsaApp/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

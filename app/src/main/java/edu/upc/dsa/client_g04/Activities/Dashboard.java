@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.activity.OnBackPressedDispatcherOwner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.upc.dsa.client_g04.R;
@@ -105,4 +103,6 @@ public class Dashboard extends AppCompatActivity {
         cargando = !cargando;
         startActivity(intentLogin);
     }
+
+    public void onBackPressed(){}
 }
