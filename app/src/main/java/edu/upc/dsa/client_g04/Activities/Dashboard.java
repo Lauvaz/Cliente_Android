@@ -3,6 +3,8 @@ package edu.upc.dsa.client_g04.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,14 +23,14 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void listObjectsClick(View v){
-        bProgreso = findViewById(R.id.progressBar);
+        /*bProgreso = findViewById(R.id.progressBar);
         View buttonList = findViewById(R.id.ListObjectsClick);
         View imageList = findViewById(R.id.imageList);
         View imagePerfil = findViewById(R.id.imagePerfil);
         View buttonPerfil = findViewById(R.id.PerfilClick);
-        View buttonLogout = findViewById(R.id.CerrarSesionClick);
+        View buttonLogout = findViewById(R.id.CerrarSesionClick);*/
         Intent intentListObjects = new Intent(this, ListObjects.class);
-        if (cargando){
+        /*if (cargando){
             bProgreso.setVisibility(v.GONE);
             buttonList.setVisibility(v.VISIBLE);
             imageList.setVisibility(v.VISIBLE);
@@ -44,19 +46,19 @@ public class Dashboard extends AppCompatActivity {
             buttonPerfil.setVisibility(v.GONE);
             buttonLogout.setVisibility(v.GONE);
         }
-        cargando = !cargando;
+        cargando = !cargando;*/
         startActivity(intentListObjects);
     }
 
     public void perfilClick(View v) {
-        bProgreso = findViewById(R.id.progressBar);
+        /*bProgreso = findViewById(R.id.progressBar);
         View buttonList = findViewById(R.id.ListObjectsClick);
         View imageList = findViewById(R.id.imageList);
         View imagePerfil = findViewById(R.id.imagePerfil);
         View buttonPerfil = findViewById(R.id.PerfilClick);
-        View buttonLogout = findViewById(R.id.CerrarSesionClick);
+        View buttonLogout = findViewById(R.id.CerrarSesionClick);*/
         Intent intentPerfil = new Intent(this, Perfil.class);
-        if (cargando){
+        /*if (cargando){
             bProgreso.setVisibility(v.GONE);
             buttonList.setVisibility(v.VISIBLE);
             imageList.setVisibility(v.VISIBLE);
@@ -72,19 +74,19 @@ public class Dashboard extends AppCompatActivity {
             buttonPerfil.setVisibility(v.GONE);
             buttonLogout.setVisibility(v.GONE);
         }
-        cargando = !cargando;
+        cargando = !cargando;*/
         startActivity(intentPerfil);
     }
 
     public void cerrarSesionClick(View v) {
-        bProgreso = findViewById(R.id.progressBar);
+        /*bProgreso = findViewById(R.id.progressBar);
         View buttonList = findViewById(R.id.ListObjectsClick);
         View imageList = findViewById(R.id.imageList);
         View imagePerfil = findViewById(R.id.imagePerfil);
         View buttonPerfil = findViewById(R.id.PerfilClick);
-        View buttonLogout = findViewById(R.id.CerrarSesionClick);
+        View buttonLogout = findViewById(R.id.CerrarSesionClick);*/
         Intent intentLogin = new Intent(this, Login.class);
-        if (cargando){
+        /*if (cargando){
             bProgreso.setVisibility(v.GONE);
             buttonList.setVisibility(v.VISIBLE);
             imageList.setVisibility(v.VISIBLE);
@@ -100,7 +102,7 @@ public class Dashboard extends AppCompatActivity {
             buttonPerfil.setVisibility(v.GONE);
             buttonLogout.setVisibility(v.GONE);
         }
-        cargando = !cargando;
+        cargando = !cargando;*/
         startActivity(intentLogin);
     }
 

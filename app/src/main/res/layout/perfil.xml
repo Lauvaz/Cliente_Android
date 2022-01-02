@@ -1,6 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/usernamePerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de usuario"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.206"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.258" />
+
+    <EditText
+        android:id="@+id/editUsernamePerfil"
+        android:layout_width="277dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/usernamePerfil"
+        app:layout_constraintTop_toBottomOf="@+id/usernamePerfil" />
+
+    <TextView
+        android:id="@+id/emailPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Email"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="@+id/editUsernamePerfil"
+        app:layout_constraintTop_toBottomOf="@+id/editUsernamePerfil" />
+
+    <EditText
+        android:id="@+id/editEmailPerfil"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/editUsernamePerfil"
+        app:layout_constraintStart_toStartOf="@+id/emailPerfil"
+        app:layout_constraintTop_toBottomOf="@+id/emailPerfil" />
+
+    <TextView
+        android:id="@+id/highscorePerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Highscore:"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="@+id/editEmailPerfil"
+        app:layout_constraintTop_toBottomOf="@+id/editEmailPerfil" />
+
+    <TextView
+        android:id="@+id/nHighscorePerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintStart_toEndOf="@+id/highscorePerfil"
+        app:layout_constraintTop_toTopOf="@+id/highscorePerfil" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
