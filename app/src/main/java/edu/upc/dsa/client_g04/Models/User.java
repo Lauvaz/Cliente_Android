@@ -4,15 +4,24 @@ public class User {
     private String name;
     private String mail;
     private String password;
-//    private Boolean active;
+    private int active;
+    private int highScore;
+    private static int id;
 
     public User(){}
+
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
 
     public User(String name, String mail, String password) {
         this.name = name;
         this.mail = mail;
         this.password = password;
     }
+
+
 
     public String getName() {
         return name;
@@ -30,19 +39,23 @@ public class User {
         this.mail = mail;
     }
 
- /*   public Boolean getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(int active) {
         this.active = active;
     }
-*/
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public static int getId(){
+        return id;
     }
 }

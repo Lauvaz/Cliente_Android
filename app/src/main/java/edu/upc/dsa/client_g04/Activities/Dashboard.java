@@ -1,110 +1,89 @@
 package edu.upc.dsa.client_g04.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.logging.Logger;
+
+import edu.upc.dsa.client_g04.APIREST;
+import edu.upc.dsa.client_g04.Models.LoginUser;
+import edu.upc.dsa.client_g04.Models.User;
 import edu.upc.dsa.client_g04.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Dashboard extends AppCompatActivity {
 
-    private ProgressBar bProgreso;
-    private boolean cargando;
+    ProgressBar bProgreso;
+
+    APIREST apiRest;
+    final Logger log = Logger.getLogger(String.valueOf(Dashboard.class));
+
+    //static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
+    static final String BASEURL = "http://147.83.7.205:8080/dsaApp/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASEURL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        apiRest = retrofit.create(APIREST.class);
     }
 
-    public void listObjectsClick(View v){
-        /*bProgreso = findViewById(R.id.progressBar);
-        View buttonList = findViewById(R.id.ListObjectsClick);
-        View imageList = findViewById(R.id.imageList);
-        View imagePerfil = findViewById(R.id.imagePerfil);
-        View buttonPerfil = findViewById(R.id.PerfilClick);
-        View buttonLogout = findViewById(R.id.CerrarSesionClick);*/
+    public void listObjectsClick(View v) {
+        //bProgreso = findViewById(R.id.progressBar);
         Intent intentListObjects = new Intent(this, ListObjects.class);
-        /*if (cargando){
-            bProgreso.setVisibility(v.GONE);
-            buttonList.setVisibility(v.VISIBLE);
-            imageList.setVisibility(v.VISIBLE);
-            imagePerfil.setVisibility(v.VISIBLE);
-            buttonPerfil.setVisibility(v.VISIBLE);
-            buttonLogout.setVisibility(v.VISIBLE);
-        }
-        else{
-            bProgreso.setVisibility(v.VISIBLE);
-            buttonList.setVisibility(v.GONE);
-            imageList.setVisibility(v.GONE);
-            imagePerfil.setVisibility(v.GONE);
-            buttonPerfil.setVisibility(v.GONE);
-            buttonLogout.setVisibility(v.GONE);
-        }
-        cargando = !cargando;*/
+        //bProgreso.setVisibility(View.VISIBLE);
         startActivity(intentListObjects);
     }
 
     public void perfilClick(View v) {
-        /*bProgreso = findViewById(R.id.progressBar);
-        View buttonList = findViewById(R.id.ListObjectsClick);
-        View imageList = findViewById(R.id.imageList);
-        View imagePerfil = findViewById(R.id.imagePerfil);
-        View buttonPerfil = findViewById(R.id.PerfilClick);
-        View buttonLogout = findViewById(R.id.CerrarSesionClick);*/
+        //bProgreso = findViewById(R.id.progressBar);
         Intent intentPerfil = new Intent(this, Perfil.class);
-        /*if (cargando){
-            bProgreso.setVisibility(v.GONE);
-            buttonList.setVisibility(v.VISIBLE);
-            imageList.setVisibility(v.VISIBLE);
-            imagePerfil.setVisibility(v.VISIBLE);
-            buttonPerfil.setVisibility(v.VISIBLE);
-            buttonLogout.setVisibility(v.VISIBLE);
-        }
-        else{
-            bProgreso.setVisibility(v.VISIBLE);
-            buttonList.setVisibility(v.GONE);
-            imageList.setVisibility(v.GONE);
-            imagePerfil.setVisibility(v.GONE);
-            buttonPerfil.setVisibility(v.GONE);
-            buttonLogout.setVisibility(v.GONE);
-        }
-        cargando = !cargando;*/
+        //bProgreso.setVisibility(View.VISIBLE);
         startActivity(intentPerfil);
     }
 
     public void cerrarSesionClick(View v) {
-        /*bProgreso = findViewById(R.id.progressBar);
-        View buttonList = findViewById(R.id.ListObjectsClick);
-        View imageList = findViewById(R.id.imageList);
-        View imagePerfil = findViewById(R.id.imagePerfil);
-        View buttonPerfil = findViewById(R.id.PerfilClick);
-        View buttonLogout = findViewById(R.id.CerrarSesionClick);*/
+        bProgreso = findViewById(R.id.progressBar);
+        bProgreso.setVisibility(View.VISIBLE);
+
+        int numID = .getId();
         Intent intentLogin = new Intent(this, Login.class);
-        /*if (cargando){
-            bProgreso.setVisibility(v.GONE);
-            buttonList.setVisibility(v.VISIBLE);
-            imageList.setVisibility(v.VISIBLE);
-            imagePerfil.setVisibility(v.VISIBLE);
-            buttonPerfil.setVisibility(v.VISIBLE);
-            buttonLogout.setVisibility(v.VISIBLE);
-        }
-        else{
-            bProgreso.setVisibility(v.VISIBLE);
-            buttonList.setVisibility(v.GONE);
-            imageList.setVisibility(v.GONE);
-            imagePerfil.setVisibility(v.GONE);
-            buttonPerfil.setVisibility(v.GONE);
-            buttonLogout.setVisibility(v.GONE);
-        }
-        cargando = !cargando;*/
-        startActivity(intentLogin);
+        Call<Void> call = apiRest.logoutUser(numID);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()){
+                    log.info("Sesión cerrada correctamente");
+                    startActivity(intentLogin);
+                    finish();
+                } else {
+                    log.info("Error al cerrar sesion");
+                    bProgreso.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                log.info("estamos aqui");
+                bProgreso.setVisibility(View.GONE);
+            }
+        });
     }
 
-    public void onBackPressed(){}
+    public void onBackPressed() {
+    }
 }
