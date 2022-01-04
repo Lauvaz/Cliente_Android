@@ -54,6 +54,7 @@ public class Login extends AppCompatActivity {
         LoginUser user = new LoginUser(name.getText().toString(),password.getText().toString());
 
         Intent intentDashboard = new Intent(this, Dashboard.class);
+        intentDashboard.putExtra("username",user.getName());
 
         Call<LoginUser> call = apiRest.loginUser(user);
         call.enqueue(new Callback<LoginUser>() {

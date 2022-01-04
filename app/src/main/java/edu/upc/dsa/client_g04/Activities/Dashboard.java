@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import edu.upc.dsa.client_g04.APIREST;
 import edu.upc.dsa.client_g04.Models.LoginUser;
+import edu.upc.dsa.client_g04.Models.Object;
 import edu.upc.dsa.client_g04.Models.User;
 import edu.upc.dsa.client_g04.R;
 import retrofit2.Call;
@@ -32,6 +33,8 @@ public class Dashboard extends AppCompatActivity {
 
     //static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
     static final String BASEURL = "http://147.83.7.205:8080/dsaApp/";
+    private int position;
+    private int numID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +81,12 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        /*int numID = user.getId();
+        String username = getIntent().getStringExtra("username");
+        for (position = 0;numID!=0;position=position+1){
+            User user = usersList.get(position);
+            if(user.getName().equals(username)) numID = user.getId();
+        }
+
         Intent intentLogin = new Intent(this, Login.class);
         Call<Void> call = apiRest.logoutUser(numID);
         call.enqueue(new Callback<Void>() {
@@ -99,7 +107,7 @@ public class Dashboard extends AppCompatActivity {
                 log.info("estamos aqui");
                 bProgreso.setVisibility(View.GONE);
             }
-        });*/
+        });
     }
 
     public void onBackPressed() {
