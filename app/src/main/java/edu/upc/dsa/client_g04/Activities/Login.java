@@ -75,22 +75,6 @@ public class Login extends AppCompatActivity {
                 bProgreso.setVisibility(v.GONE);
             }
         });
-
-        Call<User> callUser = apiRest.getUserList();
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> callUser, Response<User> response) {
-                if(!response.isSuccessful()){
-                    log.info("Error" + response.code());
-                    return;
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> callUser, Throwable t) {
-                log.info("Error");
-            }
-        });
     }
 
     public void registerLoginClick(View v){

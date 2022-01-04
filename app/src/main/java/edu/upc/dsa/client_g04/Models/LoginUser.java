@@ -3,7 +3,6 @@ package edu.upc.dsa.client_g04.Models;
 public class LoginUser {
     private String name;
     private String password;
-    private static int id;
 
     public LoginUser(){}
 
@@ -26,9 +25,5 @@ public class LoginUser {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public static int getId(){
-        return id;
     }
 }

@@ -3,13 +3,15 @@ package edu.upc.dsa.client_g04.Models;
 public class Object {
     private String name;
     private String description;
+    private int id;
 
     public Object(){}
 
-    public Object(String name, String description) {
+    public Object(String name, String description, int id) {
         this();
         this.name = name;
         this.description = description;
+        this.id = id;
     }
 
     public String getName() {return this.name;}
@@ -19,4 +21,12 @@ public class Object {
     public String getDescription() {return description;}
 
     public void setDescription(String description) {this.description = description;}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

@@ -60,7 +60,7 @@ public class Register extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()){
                     User user = response.body();
-                    log.info("Usuario registrado con nombre de usuario: "+user.getName());
+                    log.info("Usuario registrado con nombre de usuario: "+ user.getName());
                     startActivity(intentLogin);
                 } else {
                     log.info("Error al registrarse");

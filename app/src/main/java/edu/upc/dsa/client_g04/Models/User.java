@@ -10,17 +10,11 @@ public class User {
 
     public User(){}
 
-    public User(String name, String password) {
-        this.name = name;
-        this.password = password;
-    }
-
     public User(String name, String mail, String password) {
         this.name = name;
         this.mail = mail;
         this.password = password;
     }
-
 
 
     public String getName() {

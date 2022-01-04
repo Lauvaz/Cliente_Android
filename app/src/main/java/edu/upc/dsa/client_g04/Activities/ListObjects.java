@@ -75,7 +75,7 @@ public class ListObjects extends AppCompatActivity {
     }
 
 
-    public void inicializarRecyclerView(List<Object> objects){//Inicializar RecyclerView
+    public void inicializarRecyclerView(List<Object> objects){ //Inicializar RecyclerView
         Adapter adapter= new Adapter(this,objects);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
