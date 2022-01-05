@@ -6,7 +6,7 @@ public class User {
     private String password;
     private int active;
     private int highScore;
-    private static int id;
+    private int id;
 
     public User(){}
 
@@ -14,6 +14,15 @@ public class User {
         this.name = name;
         this.mail = mail;
         this.password = password;
+    }
+
+    public User(String name, String mail, String password, int active, int highScore, int id) {
+        this.name = name;
+        this.mail = mail;
+        this.password = password;
+        this.active = active;
+        this.highScore = highScore;
+        this.id = id;
     }
 
 
@@ -49,7 +58,9 @@ public class User {
         this.password = password;
     }
 
-    public static int getId(){
+    public int getId(){
         return id;
     }
+
+    public void setId(int id) {this.id = id; }
 }

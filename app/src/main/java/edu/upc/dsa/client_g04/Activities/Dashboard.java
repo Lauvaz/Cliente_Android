@@ -34,7 +34,8 @@ public class Dashboard extends AppCompatActivity {
     //static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
     static final String BASEURL = "http://147.83.7.205:8080/dsaApp/";
     private int position;
-    private int numID;
+    public static int numID;
+    public static int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class Dashboard extends AppCompatActivity {
     public void cerrarSesionClick(View v) {
         bProgreso = findViewById(R.id.progressBar);
         bProgreso.setVisibility(View.VISIBLE);
+        Intent intentLogin = new Intent(this, Login.class);
 
         Call<List<User>> callUser = apiRest.getUserList();
         callUser.enqueue(new Callback<List<User>>() {
@@ -74,42 +76,45 @@ public class Dashboard extends AppCompatActivity {
                     return;
                 }
                 usersList = response.body();
+                String username = getIntent().getStringExtra("username");
+                id = getUser(usersList, username);
+
+                Call<Void> call = apiRest.logoutUser(id);
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if(response.isSuccessful()){
+                            log.info("Sesión cerrada correctamente");
+                            startActivity(intentLogin);
+                            finish();
+                        } else {
+                            log.info("Error al cerrar sesion");
+                            bProgreso.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        log.info("estamos aqui");
+                        bProgreso.setVisibility(View.GONE);
+                    }
+                });
             }
             @Override
             public void onFailure(Call<List<User>> callUser, Throwable t) {
                 log.info("Error");
             }
         });
-
-        String username = getIntent().getStringExtra("username");
-        for (position = 0;numID!=0;position=position+1){
-            User user = usersList.get(position);
-            if(user.getName().equals(username)) numID = user.getId();
-        }
-
-        Intent intentLogin = new Intent(this, Login.class);
-        Call<Void> call = apiRest.logoutUser(numID);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.isSuccessful()){
-                    log.info("Sesión cerrada correctamente");
-                    startActivity(intentLogin);
-                    finish();
-                } else {
-                    log.info("Error al cerrar sesion");
-                    bProgreso.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                log.info("estamos aqui");
-                bProgreso.setVisibility(View.GONE);
-            }
-        });
     }
 
     public void onBackPressed() {
+    }
+
+    public int getUser(List<User> listUser, String username){
+        for (position = 0;position<listUser.size();position=position+1){
+            User user = listUser.get(position);
+            if(user.getName().equals(username)) numID = user.getId();
+        }
+        return numID;
     }
 }
