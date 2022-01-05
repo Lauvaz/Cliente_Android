@@ -4,6 +4,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/new_piskel" />
+            android:src="@drawable/lingote"
+             />
     </item>
 </layer-list>

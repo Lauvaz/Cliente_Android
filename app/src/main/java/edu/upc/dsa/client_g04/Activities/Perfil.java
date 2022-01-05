@@ -1,5 +1,6 @@
 package edu.upc.dsa.client_g04.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -9,9 +10,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+import java.util.logging.Logger;
+
 import edu.upc.dsa.client_g04.APIREST;
 import edu.upc.dsa.client_g04.Models.User;
 import edu.upc.dsa.client_g04.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -21,9 +28,14 @@ public class Perfil extends AppCompatActivity {
     TextView name;
     TextView mail;
     APIREST apiRest;
+    List<User> usersList;
+    final Logger log = Logger.getLogger(String.valueOf(Dashboard.class));
 
     //static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
     static final String BASEURL = "http://147.83.7.205:8080/dsaApp/";
+    private int position;
+    public static int numID;
+    public static int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +50,32 @@ public class Perfil extends AppCompatActivity {
                 .build();
         apiRest = retrofit.create(APIREST.class);
 
+        Call<List<User>> callUser = apiRest.getUserList();
+        callUser.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if(!response.isSuccessful()){
+                    log.info("Error" + response.code());
+                    return;
+                }
+                usersList = response.body();
+                String username = getIntent().getStringExtra("username");
+                id = getUser(usersList, username);
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                log.info("Error");
+            }
+        });
+    }
+
+    public int getUser(List<User> listUser, String username){
+        for (position = 0;position<listUser.size();position=position+1){
+            User user = listUser.get(position);
+            if(user.getName().equals(username)) numID = user.getId();
+        }
+        return numID;
     }
 
     @Override
