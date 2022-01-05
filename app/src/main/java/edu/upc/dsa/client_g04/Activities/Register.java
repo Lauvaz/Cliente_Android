@@ -76,4 +76,7 @@ public class Register extends AppCompatActivity {
             }
         });
     }
+
+    public void onBackPressed() {
+    }
 }
