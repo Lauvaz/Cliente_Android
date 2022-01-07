@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:text="Nombre de usuario"
         android:textColor="#000000"
-        android:textSize="17sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.206"
@@ -19,57 +20,59 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.258" />
 
-    <EditText
-        android:id="@+id/editUsernamePerfil"
-        android:layout_width="277dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/usernamePerfil"
-        app:layout_constraintTop_toBottomOf="@+id/usernamePerfil" />
-
     <TextView
         android:id="@+id/emailPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:text="Email"
         android:textColor="#000000"
-        android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="@+id/editUsernamePerfil"
-        app:layout_constraintTop_toBottomOf="@+id/editUsernamePerfil" />
-
-    <EditText
-        android:id="@+id/editEmailPerfil"
-        android:layout_width="0dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/editUsernamePerfil"
-        app:layout_constraintStart_toStartOf="@+id/emailPerfil"
-        app:layout_constraintTop_toBottomOf="@+id/emailPerfil" />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/usernamePerfilEdit"
+        app:layout_constraintTop_toBottomOf="@+id/usernamePerfilEdit" />
 
     <TextView
         android:id="@+id/highscorePerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:text="Highscore:"
         android:textColor="#000000"
-        android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="@+id/editEmailPerfil"
-        app:layout_constraintTop_toBottomOf="@+id/editEmailPerfil" />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/emailPerfilEdit"
+        app:layout_constraintTop_toBottomOf="@+id/emailPerfilEdit" />
 
     <TextView
         android:id="@+id/nHighscorePerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="5dp"
         android:textColor="#000000"
         android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/highscorePerfil"
         app:layout_constraintStart_toEndOf="@+id/highscorePerfil"
         app:layout_constraintTop_toTopOf="@+id/highscorePerfil" />
+
+    <TextView
+        android:id="@+id/usernamePerfilEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="@+id/usernamePerfil"
+        app:layout_constraintTop_toBottomOf="@+id/usernamePerfil" />
+
+    <TextView
+        android:id="@+id/emailPerfilEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="@+id/emailPerfil"
+        app:layout_constraintTop_toBottomOf="@+id/emailPerfil" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

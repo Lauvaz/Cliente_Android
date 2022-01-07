@@ -26,5 +26,8 @@ public interface APIREST {
     Call<List<User>> getUserList();
 
     @GET("GameServer/logout/{id}")
-    Call<Void> logoutUser(@Path("id") int numID);
+    Call<Void> logoutUser(@Path("id") int id);
+
+    @GET("GameServer/userInfo/{id}")
+    Call<User> getUserInfo(@Path("id") int id);
 }

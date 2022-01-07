@@ -58,6 +58,14 @@ public class User {
         this.password = password;
     }
 
+    public int getHighScore() {
+        return highScore;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
+    }
+
     public int getId(){
         return id;
     }

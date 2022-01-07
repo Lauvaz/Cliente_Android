@@ -25,8 +25,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Perfil extends AppCompatActivity {
 
     User user;
-    TextView name;
-    TextView mail;
+    protected TextView name;
+    protected TextView mail;
+    protected TextView highScore;
     APIREST apiRest;
     List<User> usersList;
     final Logger log = Logger.getLogger(String.valueOf(Dashboard.class));
@@ -53,7 +54,7 @@ public class Perfil extends AppCompatActivity {
         Call<List<User>> callUser = apiRest.getUserList();
         callUser.enqueue(new Callback<List<User>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onResponse(Call<List<User>> callUser, Response<List<User>> response) {
                 if(!response.isSuccessful()){
                     log.info("Error" + response.code());
                     return;
@@ -61,10 +62,34 @@ public class Perfil extends AppCompatActivity {
                 usersList = response.body();
                 String username = getIntent().getStringExtra("username");
                 id = getUser(usersList, username);
+
+                Call<User> call2 = apiRest.getUserInfo(id);
+                call2.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call2, Response<User> response) {
+                        if(!response.isSuccessful()){
+                            log.info("Error" + response.code());
+                            return;
+                        }
+                        user = response.body();
+
+                        name = findViewById(R.id.usernamePerfilEdit);
+                        mail = findViewById(R.id.emailPerfilEdit);
+                        highScore = findViewById(R.id.nHighscorePerfil);
+                        name.setText(user.getName());
+                        mail.setText(user.getMail());
+                        highScore.setText(Integer.toString(user.getHighScore()));
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call2, Throwable t) {
+                        log.info("Error");
+                    }
+                });
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(Call<List<User>> callUser, Throwable t) {
                 log.info("Error");
             }
         });

@@ -58,6 +58,8 @@ public class Dashboard extends AppCompatActivity {
     public void perfilClick(View v) {
         //bProgreso = findViewById(R.id.progressBar);
         Intent intentPerfil = new Intent(this, Perfil.class);
+        String username = getIntent().getStringExtra("username");
+        intentPerfil.putExtra("username", username);
         //bProgreso.setVisibility(View.VISIBLE);
         startActivity(intentPerfil);
     }
