@@ -1,12 +1,15 @@
 package edu.upc.dsa.client_g04.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -23,9 +26,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Login extends AppCompatActivity {
+
     TextView name;
     TextView password;
     APIREST apiRest;
+
+    List<User> usersList;
+    private int position;
+    public static int numID;
+    public static int id;
+
+    int userId;
 
     private ProgressBar bProgreso;
     final Logger log = Logger.getLogger(String.valueOf(Register.class));
@@ -42,9 +53,17 @@ public class Login extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         apiRest = retrofit.create(APIREST.class);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Login.this);
+        userId = preferences.getInt("userId", 0);
+        if(userId>0){
+            Intent intentDashboard = new Intent(this, Dashboard.class);
+            startActivity(intentDashboard);
+        }
     }
 
     public void loginClick(View v){
+
         this.name = (TextView) findViewById(R.id.editUsernameLogin);
         this.password = (TextView) findViewById(R.id.editPasswordLogin);
 
@@ -54,7 +73,8 @@ public class Login extends AppCompatActivity {
         LoginUser user = new LoginUser(name.getText().toString(),password.getText().toString());
 
         Intent intentDashboard = new Intent(this, Dashboard.class);
-        intentDashboard.putExtra("username",user.getName());
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Login.this);
 
         Call<LoginUser> call = apiRest.loginUser(user);
         call.enqueue(new Callback<LoginUser>() {
@@ -63,9 +83,32 @@ public class Login extends AppCompatActivity {
                 if(response.isSuccessful()){
                     LoginUser user = response.body();
                     log.info("Inicio de sesion con nombre de usuario: "+ user.getName());
-                    startActivity(intentDashboard);
+
+                    Call<List<User>> callUser = apiRest.getUserList();
+                    callUser.enqueue(new Callback<List<User>>() {
+                        @Override
+                        public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                            if(!response.isSuccessful()){
+                                log.info("Error" + response.code());
+                                Toast.makeText(getApplicationContext(), "El usuario no existe. Error: " + response.code(), Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                            usersList = response.body();
+                            id = getUser(usersList, name.getText().toString());
+                            preferences.edit().putInt("userId", id).commit();
+                            Toast.makeText(getApplicationContext(), "Bienvenid@ " + name.getText().toString(), Toast.LENGTH_LONG).show();
+                            startActivity(intentDashboard);
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<User>> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Error Code " + t.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+
                 } else {
                     log.info("Error al inicio de sesion");
+                    Toast.makeText(getApplicationContext(), "El usuario no existe. Error: " + response.code(), Toast.LENGTH_LONG).show();
                     bProgreso.setVisibility(v.GONE);
                 }
             }
@@ -73,6 +116,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onFailure(Call<LoginUser> call, Throwable t) {
                 log.info("estamos aqui");
+                Toast.makeText(getApplicationContext(), "Error Code " + t.getMessage(), Toast.LENGTH_LONG).show();
                 bProgreso.setVisibility(v.GONE);
             }
         });
@@ -84,5 +128,13 @@ public class Login extends AppCompatActivity {
     }
 
     public void onBackPressed() {
+    }
+
+    public int getUser(List<User> listUser, String username){
+        for (position = 0;position<listUser.size();position=position+1){
+            User user = listUser.get(position);
+            if(user.getName().equals(username)) numID = user.getId();
+        }
+        return numID;
     }
 }

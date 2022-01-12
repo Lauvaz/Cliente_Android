@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -60,6 +61,7 @@ public class ListObjects extends AppCompatActivity {
             public void onResponse(Call<List<Object>> call, Response<List<Object>> response) {
                 if(!response.isSuccessful()){
                     log.info("Error" + response.code());
+                    Toast.makeText(getApplicationContext(), "Error: " + response.code(), Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -69,6 +71,7 @@ public class ListObjects extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Object>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Error Code: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 log.info("Error");
             }
         });

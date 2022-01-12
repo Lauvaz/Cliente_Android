@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -33,9 +35,7 @@ public class Dashboard extends AppCompatActivity {
 
     //static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
     static final String BASEURL = "http://147.83.7.205:8080/dsaApp/";
-    private int position;
-    public static int numID;
-    public static int id;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,44 +67,31 @@ public class Dashboard extends AppCompatActivity {
     public void cerrarSesionClick(View v) {
         bProgreso = findViewById(R.id.progressBar);
         bProgreso.setVisibility(View.VISIBLE);
-        Intent intentLogin = new Intent(this, Login.class);
+        Intent intentLogin = new Intent(this, Login.class);SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Dashboard.this);
+        id = preferences.getInt("userId", 0);
 
-        Call<List<User>> callUser = apiRest.getUserList();
-        callUser.enqueue(new Callback<List<User>>() {
+        Call<Void> call = apiRest.logoutUser(id);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<List<User>> callUser, Response<List<User>> response) {
-                if(!response.isSuccessful()){
-                    log.info("Error" + response.code());
-                    return;
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()){
+                    log.info("Sesión cerrada correctamente");
+                    preferences.edit().clear().commit();
+                    Toast.makeText(getApplicationContext(), "Sesión cerrada correctamente", Toast.LENGTH_LONG).show();
+                    startActivity(intentLogin);
+                    finish();
+                } else {
+                    log.info("Error al cerrar sesion");
+                    Toast.makeText(getApplicationContext(), "Error al cerrar sesión. Code: " + response.code(), Toast.LENGTH_LONG).show();
+                    bProgreso.setVisibility(View.GONE);
                 }
-                usersList = response.body();
-                String username = getIntent().getStringExtra("username");
-                id = getUser(usersList, username);
-
-                Call<Void> call = apiRest.logoutUser(id);
-                call.enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if(response.isSuccessful()){
-                            log.info("Sesión cerrada correctamente");
-                            startActivity(intentLogin);
-                            finish();
-                        } else {
-                            log.info("Error al cerrar sesion");
-                            bProgreso.setVisibility(View.GONE);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        log.info("estamos aqui");
-                        bProgreso.setVisibility(View.GONE);
-                    }
-                });
             }
+
             @Override
-            public void onFailure(Call<List<User>> callUser, Throwable t) {
-                log.info("Error");
+            public void onFailure(Call<Void> call, Throwable t) {
+                log.info("estamos aqui");
+                Toast.makeText(getApplicationContext(), "Error Code: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                bProgreso.setVisibility(View.GONE);
             }
         });
     }
@@ -112,11 +99,4 @@ public class Dashboard extends AppCompatActivity {
     public void onBackPressed() {
     }
 
-    public int getUser(List<User> listUser, String username){
-        for (position = 0;position<listUser.size();position=position+1){
-            User user = listUser.get(position);
-            if(user.getName().equals(username)) numID = user.getId();
-        }
-        return numID;
-    }
 }

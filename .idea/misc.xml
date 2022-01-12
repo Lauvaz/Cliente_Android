@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/amgal/AndroidStudioProjects/Cliente_Android/app/src/main/res/drawable/corners.xml" value="0.1" />
+        <entry key="..\:/Users/amgal/AndroidStudioProjects/Cliente_Android/app/src/main/res/drawable/redondeado.xml" value="0.1" />
         <entry key="..\:/Users/amgal/AndroidStudioProjects/Cliente_Android/app/src/main/res/drawable/splash_background.xml" value="0.1" />
         <entry key="..\:/Users/amgal/AndroidStudioProjects/Cliente_Android/app/src/main/res/drawable/splash_background2.xml" value="0.1" />
         <entry key="..\:/Users/amgal/AndroidStudioProjects/Cliente_Android/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />

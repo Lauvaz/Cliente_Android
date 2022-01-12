@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -61,9 +62,11 @@ public class Register extends AppCompatActivity {
                 if (response.isSuccessful()){
                     User user = response.body();
                     log.info("Usuario registrado con nombre de usuario: "+ user.getName());
+                    Toast.makeText(getApplicationContext(), "Usuario registrado: " + name.getText().toString(), Toast.LENGTH_LONG).show();
                     startActivity(intentLogin);
                 } else {
                     log.info("Error al registrarse");
+                    Toast.makeText(getApplicationContext(), "Error al registrarse. Code: " + response.code(), Toast.LENGTH_LONG).show();
                     bProgreso.setVisibility(v.GONE);
                 }
             }
@@ -72,6 +75,7 @@ public class Register extends AppCompatActivity {
             public void onFailure(Call<User> call, Throwable t) {
                 //t.printStackTrace();
                 log.info("estamos aqui");
+                Toast.makeText(getApplicationContext(), "Error Code: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 bProgreso.setVisibility(v.GONE);
             }
         });

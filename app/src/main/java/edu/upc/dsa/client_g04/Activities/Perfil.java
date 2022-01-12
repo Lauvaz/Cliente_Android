@@ -1,14 +1,17 @@
 package edu.upc.dsa.client_g04.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -34,9 +37,7 @@ public class Perfil extends AppCompatActivity {
 
     //static final String BASEURL = "http://10.0.2.2:8080/dsaApp/";
     static final String BASEURL = "http://147.83.7.205:8080/dsaApp/";
-    private int position;
-    public static int numID;
-    public static int id;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,56 +52,34 @@ public class Perfil extends AppCompatActivity {
                 .build();
         apiRest = retrofit.create(APIREST.class);
 
-        Call<List<User>> callUser = apiRest.getUserList();
-        callUser.enqueue(new Callback<List<User>>() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Perfil.this);
+        id = preferences.getInt("userId", 0);
+
+        Call<User> call = apiRest.getUserInfo(id);
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<List<User>> callUser, Response<List<User>> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if(!response.isSuccessful()){
                     log.info("Error" + response.code());
+                    Toast.makeText(getApplicationContext(), "Error: " + response.code(), Toast.LENGTH_LONG).show();
                     return;
                 }
-                usersList = response.body();
-                String username = getIntent().getStringExtra("username");
-                id = getUser(usersList, username);
+                user = response.body();
 
-                Call<User> call2 = apiRest.getUserInfo(id);
-                call2.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call2, Response<User> response) {
-                        if(!response.isSuccessful()){
-                            log.info("Error" + response.code());
-                            return;
-                        }
-                        user = response.body();
-
-                        name = findViewById(R.id.usernamePerfilEdit);
-                        mail = findViewById(R.id.emailPerfilEdit);
-                        highScore = findViewById(R.id.nHighscorePerfil);
-                        name.setText(user.getName());
-                        mail.setText(user.getMail());
-                        highScore.setText(Integer.toString(user.getHighScore()));
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call2, Throwable t) {
-                        log.info("Error");
-                    }
-                });
+                name = findViewById(R.id.usernamePerfilEdit);
+                mail = findViewById(R.id.emailPerfilEdit);
+                highScore = findViewById(R.id.nHighscorePerfil);
+                name.setText(user.getName());
+                mail.setText(user.getMail());
+                highScore.setText(Integer.toString(user.getHighScore()));
             }
 
             @Override
-            public void onFailure(Call<List<User>> callUser, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 log.info("Error");
-            }
+                Toast.makeText(getApplicationContext(), "Error Code: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                }
         });
-    }
-
-    public int getUser(List<User> listUser, String username){
-        for (position = 0;position<listUser.size();position=position+1){
-            User user = listUser.get(position);
-            if(user.getName().equals(username)) numID = user.getId();
-        }
-        return numID;
     }
 
     @Override
