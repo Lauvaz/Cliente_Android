@@ -2,6 +2,8 @@ package edu.upc.dsa.client_g04.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,6 +36,9 @@ public class Register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
         Retrofit retrofit = new Retrofit.Builder()
@@ -81,6 +86,13 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    public void onBackPressed() {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Log.i("ActionBar", "Atrás!");
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

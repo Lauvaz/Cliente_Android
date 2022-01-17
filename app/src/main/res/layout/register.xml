@@ -4,102 +4,146 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     tools:layout_editor_absoluteX="-11dp"
-    tools:layout_editor_absoluteY="-97dp">
+    tools:layout_editor_absoluteY="-97dp"
+    android:background="#F8E85D">
 
     <TextView
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="5dp"
         android:text="Email"
         android:textColor="#000000"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.37"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32" />
+        app:layout_constraintVertical_bias="0.28" />
 
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
+        android:elevation="5dp"
         android:text="Nombre de usuario"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
     <TextView
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
+        android:elevation="5dp"
         android:text="Contraseña"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/username"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/editUsername"
+        app:layout_constraintTop_toBottomOf="@+id/editUsername" />
 
     <Button
         android:id="@+id/registerClick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:backgroundTint="#3F51B5"
+        android:layout_width="169dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#090909"
+        android:elevation="10dp"
         android:onClick="registerClick"
         android:text="Registrarse"
         app:iconTint="#3F51B5"
         app:layout_constraintEnd_toEndOf="@+id/editPassword"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="382dp"
+        android:layout_height="56dp"
+        android:background="@drawable/redondeado"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editEmail"
+        app:layout_constraintEnd_toEndOf="@+id/editEmail"
+        app:layout_constraintStart_toStartOf="@+id/editEmail"
+        app:layout_constraintTop_toTopOf="@+id/editEmail" />
+
     <EditText
         android:id="@+id/editEmail"
-        android:layout_width="190dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="15dp"
-        android:backgroundTint="#1E1E1E"
+        android:layout_width="363dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:elevation="5dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="@+id/email"
-        app:layout_constraintStart_toEndOf="@+id/email"
-        app:layout_constraintTop_toTopOf="@+id/email" />
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/email" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="382dp"
+        android:layout_height="56dp"
+        android:background="@drawable/redondeado"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editUsername"
+        app:layout_constraintEnd_toEndOf="@+id/editUsername"
+        app:layout_constraintStart_toStartOf="@+id/editUsername"
+        app:layout_constraintTop_toTopOf="@+id/editUsername" />
 
     <EditText
         android:id="@+id/editUsername"
-        android:layout_width="190dp"
-        android:layout_height="40dp"
-        android:backgroundTint="#1E1E1E"
+        android:layout_width="363dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:elevation="5dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/username"
+        android:textColor="#000000"
         app:layout_constraintStart_toStartOf="@+id/editEmail"
-        app:layout_constraintTop_toTopOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="382dp"
+        android:layout_height="56dp"
+        android:background="@drawable/redondeado"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editPassword"
+        app:layout_constraintEnd_toEndOf="@+id/editPassword"
+        app:layout_constraintStart_toStartOf="@+id/editPassword"
+        app:layout_constraintTop_toTopOf="@+id/editPassword" />
 
     <EditText
         android:id="@+id/editPassword"
-        android:layout_width="190dp"
-        android:layout_height="40dp"
-        android:backgroundTint="#1E1E1E"
+        android:layout_width="363dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:elevation="5dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="@+id/password"
-        app:layout_constraintStart_toStartOf="@+id/editUsername"
-        app:layout_constraintTop_toTopOf="@+id/password" />
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <TextView
         android:id="@+id/titulo"
         android:layout_width="247dp"
         android:layout_height="81dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="monospace"
         android:shadowColor="#000000"
         android:text="Crear usario en GoldenRush"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
