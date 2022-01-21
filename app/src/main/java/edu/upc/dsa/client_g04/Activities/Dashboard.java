@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import com.unity3d.player.UnityPlayerActivity;
+
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -41,6 +43,7 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -62,6 +65,11 @@ public class Dashboard extends AppCompatActivity {
         intentPerfil.putExtra("username", username);
         //bProgreso.setVisibility(View.VISIBLE);
         startActivity(intentPerfil);
+    }
+
+    public void jugarClick(View v){
+        Intent intentGame = new Intent(this, UnityPlayerActivity.class);
+        startActivity(intentGame);
     }
 
     public void cerrarSesionClick(View v) {
